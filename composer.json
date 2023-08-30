@@ -1,0 +1,17 @@
+{
+    "name": "itielly/event-api",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app"
+        }
+    },
+    "authors": [
+        {
+            "name": "Itielly",
+            "email": "menezes.itielly@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
