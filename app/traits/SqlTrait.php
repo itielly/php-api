@@ -22,7 +22,7 @@ trait SqlTrait
      * @param BaseModel $model
      * @return string
      */
-    public function sqlInsert(BaseModel $model)
+    public function sqlInsert($model)
     {
         $inputs = $this->getModelWithoutPrimaryKey($model);
 
@@ -45,6 +45,34 @@ trait SqlTrait
             $query->execute();
 
             return $this->conn->lastInsertId();
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
+    public function sqlCreate($values)
+    {       
+        try {
+            $query = $this->conn
+            ->prepare("INSERT INTO Event
+                (
+                name,
+                dayEvent,
+                initHour,
+                finishHour,
+                description
+                )
+                VALUES (
+                'tesfs',
+                '2024-05-30',
+                '15:00:00',
+                '17:30:00',
+                'wfwfwefef'
+            )");
+
+            $query->execute();
+
+            return $this->sqlSelect()->get();
         } catch (PDOException $e) {
             throw $e;
         }
@@ -200,9 +228,9 @@ trait SqlTrait
         return true;
     }
 
-    public function sqlDelete($where)
+    public function sqlDelete($id)
     {
-        $sql = "DELETE FROM {$this->table} " . $this->where($where);
+        $sql = "DELETE FROM Event WHERE id = {$id}";
 
         try {
             $stmt = $this->conn->prepare($sql);
@@ -225,7 +253,6 @@ trait SqlTrait
 
     public function sqlRawSelect($sql, $bind = [], $dd = false)
     {
-        // var_dump($this->conn);
         $this->stmt = $this->conn->prepare($sql);
 
         $this->bindValues($bind);
@@ -252,7 +279,6 @@ trait SqlTrait
         $this->stmt = $this->conn->prepare($sql);
 
         $this->bindValues($bind);
-
         $this->stmt->execute();
 
         if ($this->stmt->rowCount() <= 0) {
