@@ -19,9 +19,39 @@ class EventController extends ApiController
     }
   }
 
-  public function store($params)
+  public function post()
   {
-    var_dump($params);
-    var_dump("store do contact");
+    try 
+    {
+      echo $this->returnSuccess(
+      "Evento criado com sucesso!",
+      (new EventService)->post());
+    } catch (Exception $e) {
+      echo $this->returnError($e, "Erro ao criar evento", 400);
+    }
+  }
+
+  public function edit()
+  {
+    try 
+    {
+      echo $this->returnSuccess(
+      "Evento editado com sucesso!",
+      (new EventService)->edit());
+    } catch (Exception $e) {
+      echo $this->returnError($e, "Erro ao editar evento", 400);
+    }
+  }
+
+  public function delete()
+  {
+    try 
+    {
+      echo $this->returnSuccess(
+      "Evento deletado com sucesso!",
+      (new EventService)->delete());
+    } catch (Exception $e) {
+      echo $this->returnError($e, "Erro ao deletar evento", 400);
+    }
   }
 }

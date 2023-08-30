@@ -22,16 +22,16 @@
 
     public function post()
     {
-      
+      return $this->repository->create();
     }
 
-    public function put()
+    public function edit()
     {
-      
+      return $this->repository->put();
     }
 
     public function delete()
     {
-      
+      return $this->repository->delete();
     }
   }

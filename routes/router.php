@@ -3,7 +3,6 @@
 function load(string $controller, string $action)
 {
     try {
-        // se controller existe
         $controllerNamespace = "app\\controllers\\{$controller}";
 
         if (!class_exists($controllerNamespace)) {
@@ -26,9 +25,15 @@ function load(string $controller, string $action)
 
 $router = [
   "GET" => [
-    "/" => fn () => load("EventController", "index"),
+    "/event" => fn () => load("EventController", "index"),
   ],
   "POST" => [
-    "/store" => fn () => load("EventController", "store"),
+    "/event" => fn () => load("EventController", "post"),
+  ],
+  "PUT" => [
+    "/event" => fn () => load("EventController", "edit"),
+  ],
+  "DELETE" => [
+    "/event" => fn () => load("EventController", "delete"),
   ],
 ];
