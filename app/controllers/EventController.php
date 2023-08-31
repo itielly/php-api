@@ -23,9 +23,10 @@ class EventController extends ApiController
   {
     try 
     {
+      $request = $this->request(false);
       echo $this->returnSuccess(
       "Evento criado com sucesso!",
-      (new EventService)->post());
+      (new EventService)->post($request));
     } catch (Exception $e) {
       echo $this->returnError($e, "Erro ao criar evento", 400);
     }
@@ -35,9 +36,10 @@ class EventController extends ApiController
   {
     try 
     {
+      $request = $this->request(false);
       echo $this->returnSuccess(
       "Evento editado com sucesso!",
-      (new EventService)->edit());
+      (new EventService)->edit($request));
     } catch (Exception $e) {
       echo $this->returnError($e, "Erro ao editar evento", 400);
     }
@@ -47,9 +49,11 @@ class EventController extends ApiController
   {
     try 
     {
+      $request = $this->request(false);
+
       echo $this->returnSuccess(
       "Evento deletado com sucesso!",
-      (new EventService)->delete());
+      (new EventService)->delete($request->id));
     } catch (Exception $e) {
       echo $this->returnError($e, "Erro ao deletar evento", 400);
     }
