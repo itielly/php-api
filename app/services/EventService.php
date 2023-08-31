@@ -20,18 +20,18 @@
       return $this->repository->get();
     }
 
-    public function post()
+    public function post($values)
     {
-      return $this->repository->create();
+      return $this->repository->create($values);
     }
 
-    public function edit()
+    public function edit($values)
     {
-      return $this->repository->put();
+      return $this->repository->put($values);
     }
 
-    public function delete()
+    public function delete($id)
     {
-      return $this->repository->delete();
+      return $this->repository->delete($id);
     }
   }

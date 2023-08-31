@@ -22,30 +22,18 @@ class EventRepository
       return $this->model->getAll();
   }
 
-  public function create()
+  public function create($values)
   {
-      $data = new stdClass();
-      $data->name = 'irruuu';
-      $data->dayEvent = '2024-05-30';
-      $data->initHour = '15:00:00';
-      $data->finishHour = '17:30:00';
-      $data->description ='Um evento inesquicível para os amantes de Chopin';
-
-      return $this->model->create($data);
+      return $this->model->create($values);
   }
 
-  public function put()
+  public function put($values)
   {
-      $data = new stdClass();
-      $data->id = 5;
-      $data->name = 'ririri';
-
-      return $this->model->put($data);
+      return $this->model->put($values);
   }
 
-  public function delete()
+  public function delete($id)
   {
-    $id = 5;
     return $this->model->delete($id);
   }
 }

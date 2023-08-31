@@ -53,22 +53,17 @@ trait SqlTrait
     public function sqlCreate($values)
     {       
         try {
+            $values = json_decode($values);
+
             $query = $this->conn
             ->prepare("INSERT INTO Event
-                (
-                name,
-                dayEvent,
-                initHour,
-                finishHour,
-                description
-                )
-                VALUES (
-                'tesfs',
-                '2024-05-30',
-                '15:00:00',
-                '17:30:00',
-                'wfwfwefef'
-            )");
+                (name, dayEvent, initHour, finishHour, description) VALUES (:name, :day, :initHour, :finishHour, :description)");
+
+            $query->bindValue(":name", $values->name); 
+            $query->bindValue(":day", $values->dayEvent); 
+            $query->bindValue(":initHour", $values->initHour);
+            $query->bindValue(":finishHour", $values->finishHour);
+            $query->bindValue(":description", $values->description);
 
             $query->execute();
 
@@ -274,11 +269,9 @@ trait SqlTrait
      * @return bool
      * @throws Exception
      */
-    public function sqlRawUpdate($sql, $bind = [])
+    public function sqlRawUpdate($sql)
     {
         $this->stmt = $this->conn->prepare($sql);
-
-        $this->bindValues($bind);
         $this->stmt->execute();
 
         if ($this->stmt->rowCount() <= 0) {

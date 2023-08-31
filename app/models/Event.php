@@ -5,6 +5,9 @@ use app\utils\BaseModel;
 
   class Event extends BaseModel
   {
+    /** @var Manager|PDO $conn */
+    protected $conn;
+
     protected $table = "Event";
 
     protected $name;
@@ -25,14 +28,36 @@ use app\utils\BaseModel;
     }
 
     public function put($values)
-    {  
-      $sql = "UPDATE Event SET name = 'jui' WHERE id = 10";
+    { 
+      $fields = array();
+
+      if (isset($values->name)) {
+          $fields[] = "name='$values->name'";
+      }
+
+      if (isset($values->dayEvent)) {
+          $fields[] = "dayEvent='$values->dayEvent'";
+      }
+
+      if (isset($values->initHour)) {
+          $fields[] = "initHour='$values->initHour'";
+      }
+
+      if (isset($values->finishHour)) {
+          $fields[] = "finishHour='$values->finishHour'";
+      }
+
+      if (isset($values->description)) {
+          $fields[] = "description='$values->description'";
+      }
+
+      $sql = "UPDATE Event SET " . implode(',', $fields) . " WHERE id={$values->id}";
+
       return $this->sqlRawUpdate($sql);
     }
 
-    public function delete()
+    public function delete($id)
     {
-      $id = 8;
       return $this->sqlDelete($id);
     }
   }
