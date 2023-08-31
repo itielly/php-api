@@ -2,6 +2,7 @@
   namespace app\models;
 
 use app\utils\BaseModel;
+use PDO;
 
   class Event extends BaseModel
   {
@@ -18,8 +19,7 @@ use app\utils\BaseModel;
 
     public function getAll()
     {  
-      return $this->sqlSelect()
-        ->get();
+      return $this->sqlSelect()->get();
     }
 
     public function create($values)

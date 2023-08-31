@@ -3,9 +3,14 @@
 namespace app\controllers;
 use app\services\EventService;
 use Exception;
+use app\services\GoogleCalendar;
 
 class EventController extends ApiController
 {
+  /**
+     * @var GoogleCalendar
+     */
+
   public function index()
   {
     try 
