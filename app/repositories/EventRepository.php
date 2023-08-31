@@ -3,7 +3,6 @@
 namespace app\repositories;
 
 use app\models\Event;
-use stdClass;
 
 class EventRepository
 {
