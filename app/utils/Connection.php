@@ -16,7 +16,7 @@ final class Connection
     $host         = 'localhost';
     $name         = 'eventDB';
     $user         = 'root';
-    $pass         = 'myNewPassword';
+    $pass         = 'myPassword';
     $dsn = "mysql:dbname={$name};host={$host}";
 
     return self::getConn($dsn, $user, $pass);

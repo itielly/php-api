@@ -89,7 +89,8 @@ trait SqlTrait
             $sql = "DELETE FROM Event WHERE id = {$id}";
             $stmt = $this->conn->prepare($sql);
 
-            return $stmt->execute();
+            $stmt->execute();
+            return $this->sqlSelect()->get();
         } catch (PDOException $e) {
             throw $e;
         }
@@ -120,7 +121,7 @@ trait SqlTrait
             throw new Exception("Row not Found, query: \"" . $sql . "\"");
         }
 
-        return true;
+        return $this->sqlSelect()->get();
     }
 
     public function bind(array $bind)
